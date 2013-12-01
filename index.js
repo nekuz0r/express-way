@@ -48,6 +48,7 @@ function loadRoutes (app, currentPath) {
         else {
             mod = require(path.join(currentPath, modName));
             mod.baseUrl = path.join(currentPath, ((modName === 'index') ? String() : modName)).slice(app.get('routes').length);
+            mod.baseUrl = path.join('/', mod.baseUrl);
             registerRoutes(app, mod);
         }
     }
@@ -94,7 +95,7 @@ function registerRoutes (app, mod) {
 
 function createHandler (modUrl, actionName, actionHandler) {
     return function (req, res) {
-        var viewName = path.join(modUrl, actionName) || 'index';
+        var viewName = path.join(modUrl, (actionName.length) ? actionName : 'index');
         var thisObject = {};
         thisObject.actionName = actionName;
         thisObject.currentLink = path.join(modUrl, actionName).replace(/(\/_.*?\/?)/g, replaceUnderscore);

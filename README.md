@@ -46,6 +46,21 @@ exports.get.default.params = '/:name?';
 p Welcome #{name} !
 ```
 
+Jade precompilation performance
+===============================
+
+*Without Precompilation*
+
+```
+GET /bar 304 290ms
+```
+
+*With Precompilation*
+
+```
+GET /bar 304 6ms
+```
+
 License
 =======
 
