@@ -82,7 +82,12 @@ function registerRoutes (app, mod) {
                                 viewPath = path.join(app.get('views'), viewName) + '.jade';
                                 if (fs.existsSync(viewPath)) {
                                     console.log('PRECOMPILE', ':', viewName, '@', viewPath);
-                                    precompiledViews[viewName] = jade.compile(fs.readFileSync(viewPath, { encoding: 'utf8' }), options);
+                                    var opts = {
+                                        basedir: app.locals.basedir,
+                                        filename: viewPath,
+                                        pretty: true
+                                    };
+                                    precompiledViews[viewName] = jade.compile(fs.readFileSync(viewPath, { encoding: 'utf8' }), opts);
                                 }
                             }
                         }

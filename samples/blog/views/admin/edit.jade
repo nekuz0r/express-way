@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    form(method='post')
+        h2 Title
+        input(type='text', name='title', id='title', value=values.title)
+        h2 Content
+        input(type='text', name='content', id='content', value=values.content)
+        br
+        input(type='submit') Submit

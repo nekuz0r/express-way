@@ -1,0 +1,14 @@
+{
+    "name": "express-way sample blog",
+    "version": "0.0.1",
+    "description": "express-way sample (blog)",
+    "main": "app.js",
+    "dependencies": {
+        "express": "3.0.0",
+        "jade": "*",
+        "underscore": "*",
+        "express-way": "*"
+    },
+    "author": "Leandre Gohy <leandre.gohy@hexeo.be>",
+    "license": "MIT"
+}

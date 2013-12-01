@@ -1,0 +1,18 @@
+block content
+    table
+        thead
+            tr
+                th id
+                th title
+                th
+                th
+        tbody
+            each post in posts
+                tr
+                    td #{post.rowid}
+                    td #{post.title}
+                    td
+                        a(href='#{thisPage.currentLink}/edit/#{post.rowid}') edit
+                    td
+                        a(href='#{thisPage.currentLink}/delete/#{post.rowid}') delete
+    a(href='#{thisPage.currentLink}/create') create a new post

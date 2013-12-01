@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1 My awesome blog !
+    each post in posts
+        h2
+            a(href='/post/#{post.rowid}') #{post.title}
+        p #{post.content}
