@@ -1,0 +1,18 @@
+{
+    "name": "express-way",
+    "version": "0.0.1",
+    "description": "Express auto routing and jade precompiling",
+    "main": "index.js",
+    "dependencies": {
+        "jade": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nekuz0r/express-way.git"
+    },
+    "keywords": [
+        "express", "route", "routing", "way", "jade", "middleware", "highway", "auto", "autoroute", "precompile"
+    ],
+    "author": "Leandre Gohy <leandre.gohy@hexeo.be>",
+    "license": "MIT"
+}
