@@ -26,6 +26,26 @@ httpServer.listen(app.get('port'), function() {
 });
 ```
 
+Sample
+======
+
+*routes/index.js*
+
+```js
+exports.get = {};
+
+exports.get.default = function (req, res) {
+    this.render({ name : req.params.name });
+}
+exports.get.default.params = '/:name?';
+```
+
+*views/index.jade*
+
+```jade
+p Welcome #{name} !
+```
+
 License
 =======
 
