@@ -77,9 +77,13 @@ function registerRoutes (app, mod) {
                         console.log(methodName.toUpperCase(), ':', routeUrl);
                         
                         if (options.precompileViews === true) {
-                            viewName = path.join(mod.baseUrl, ((actionName.length) ? actionName : 'index'));
+                            viewName = path.join(mod.baseUrl, actionName);
                             if (precompiledViews[viewName] === undefined) {
-                                viewPath = path.join(app.get('views'), viewName) + '.jade';
+                                viewPath = path.join(app.get('views'), viewName);
+                                if (fs.existsSync(viewPath) && fs.lstatSync(viewPath).isDirectory()) {
+                                    viewPath = path.join(viewPath, 'index');
+                                }
+                                viewPath += '.jade';
                                 if (fs.existsSync(viewPath)) {
                                     console.log('PRECOMPILE', ':', viewName, '@', viewPath);
                                     var opts = {
@@ -100,11 +104,15 @@ function registerRoutes (app, mod) {
 
 function createHandler (modUrl, actionName, actionHandler) {
     return function (req, res) {
-        var viewName = path.join(modUrl, (actionName.length) ? actionName : 'index');
+        //var viewName = path.join(modUrl, (actionName.length) ? actionName : 'index');
+        var viewName = path.join(modUrl, actionName);
         var thisObject = {};
         thisObject.actionName = actionName;
         thisObject.currentLink = path.join(modUrl, actionName).replace(/(\/_.*?\/?)/g, replaceUnderscore);
-        thisObject.parentLink = modUrl;
+        thisObject.parentLink = modUrl.replace(/(\/_.*?\/?)/g, replaceUnderscore);
+        if (!actionName) {
+            thisObject.parentLink = thisObject.parentLink.substring(0, thisObject.parentLink.lastIndexOf('/'));
+        }
         thisObject.render = function (opts) {
             opts = opts || {};
             opts.thisPage = thisObject;
