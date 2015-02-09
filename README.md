@@ -1,7 +1,7 @@
 express-way
 ===========
 
-Express auto routing and jade precompiling
+Express auto routing
 
 ```js
 var express = require('express');
@@ -9,20 +9,18 @@ var http = require('http');
 var way = require('express-way');
 var app = express();
 
-app.locals.basedir = __dirname + '/views';
-app.configure(function () {
-    app.set('port', process.env.PORT || 3030);
-    app.set('views', __dirname + '/views');
-    app.set('routes', __dirname + '/routes');
-    app.set('view engine', 'jade');
-    app.use(app.router);
-});
-
-way(app, { precompileViews : true });
+app.locals.basedir = fs.join(__dirname, 'views');
+app.set('port', process.env.PORT || 3030);
+app.set('views', fs.join(__dirname, 'views'));
+app.set('routes', fs.join(__dirname, 'routes'));
+app.set('view engine', 'jade');
 
 var httpServer = http.createServer(app);
 httpServer.listen(app.get('port'), function() {
-    console.log('Express server listening on port', app.get('port'));
+  // Generate routes based on /routes hierarchy
+  way(app);
+  
+  console.log('Express server listening on port', app.get('port'));
 });
 ```
 
@@ -44,21 +42,6 @@ exports.get.default.params = '/:name?';
 
 ```jade
 p Welcome #{name} !
-```
-
-Jade precompilation performance
-===============================
-
-*Without Precompilation*
-
-```
-GET /bar 304 290ms
-```
-
-*With Precompilation*
-
-```
-GET /bar 304 6ms
 ```
 
 License

@@ -1,10 +1,9 @@
 {
     "name": "express-way",
-    "version": "0.0.4",
-    "description": "Express auto routing and jade precompiling",
+    "version": "1.0.0",
+    "description": "Express auto routing",
     "main": "index.js",
     "dependencies": {
-        "jade": "*"
     },
     "repository": {
         "type": "git",
